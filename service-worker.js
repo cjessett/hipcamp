@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/hipcamp/precache-manifest.f534033c2755c3922e6cb0d45017c1a1.js"
+  "/hipcamp/precache-manifest.ad89759fa2b4d444cd24128646b7e810.js"
 );
 
 self.addEventListener('message', (event) => {

@@ -1,29 +1,37 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import X from './X';
 import Check from './Check';
 import DropDown from './DropDown';
 import FeaturesList from './FeaturesList';
-import { sortByPresence } from '../utils';
 
-export default class Feature extends Component {
-  constructor() {
-    super();
-    this.state = { expand: false };
-    this.toggleDropDown = this.toggleDropDown.bind(this);
+function addLevel(level) {
+  return function(feature) {
+    return { ...feature, level };
   }
-  toggleDropDown() {
-    this.setState((state) => ({ expand: !state.expand }))
+}
+
+export default function Feature({ title, presence, subfeatures, level }) {
+  const [open, setOpen] = useState(false);
+  const toggleOpen = (e) => {
+    e.stopPropagation();
+    setOpen(!open);
   }
-  render() {
-    const { title, presence, subfeatures } = this.props;
-    const hasSubFeatures = !!subfeatures.length;
-    return (
-      <li>
-        {presence ? <Check /> : <X />}
-        <h5 className="title">{title}</h5>
-        {hasSubFeatures && <DropDown onClick={this.toggleDropDown} />}
-        {this.state.expand && <FeaturesList data={subfeatures.sort(sortByPresence)} />}
-      </li>
-    );
-  }
+  const hasSubFeatures = !!subfeatures.length;
+  const cursor = hasSubFeatures ? 'pointer' : 'inherit';
+  const fontSize = `${2 / level}rem`;
+  return (
+    <li style={{ cursor, fontSize }} onClick={e => toggleOpen(e)}>
+      {presence ? <Check /> : <X />}
+      <header className="title">{title}</header>
+      {hasSubFeatures && <DropDown />}
+      {hasSubFeatures && open && <FeaturesList features={subfeatures.map(addLevel(level + 0.5))} />}
+    </li>
+  );
+}
+
+Feature.defaultProps = {
+  title: '',
+  presence: false,
+  subfeatures: [],
+  level: 1,
 }

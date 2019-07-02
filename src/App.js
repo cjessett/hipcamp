@@ -1,15 +1,13 @@
 import React from 'react';
 import FeaturesList from './components/FeaturesList';
 import './App.css';
-import { sortByPresence } from './utils';
 
-function App(props) {
-  const features = props.features.sort(sortByPresence);
+function App({ features }) {
   return (
     <div>
       <header className="App-header">Camp Features</header>
       <section id="features">
-        <FeaturesList data={features} />
+        <FeaturesList features={features} />
       </section>
     </div>
   );

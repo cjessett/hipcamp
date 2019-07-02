@@ -1,10 +1,11 @@
 import React from 'react';
 import Feature from './Feature';
 
-export default function FeaturesList({ data }) {
+export default function FeaturesList({ features }) {
+  const sortedFeatures = features.sort((a, b) => a.presence < b.presence);
   return (
     <ul>
-    {data.map((props) => <Feature key={props.title} {...props} />)}
+    {sortedFeatures.map((props) => <Feature key={props.title} {...props} />)}
     </ul>
   )
 }

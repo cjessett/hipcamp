@@ -17,11 +17,11 @@ yarn start
 
 ## Components
 
-##### ```FeaturesList```
+#### ```FeaturesList```
   - Takes a list of features and renders a `Feature` component for each.
   
-##### ```Feature```
-  - Takes feature properties and renders them. If there are subfeatures it renders a nested `FeaturesList`.
+#### ```Feature```
+  - Takes feature properties and renders them. If there are subfeatures it renders a nested `FeaturesList`. For nested sub-feature titles, it adds a `level` prop that is used to calculate the font size.
 
 ### Requirements
 

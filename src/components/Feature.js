@@ -4,7 +4,7 @@ import Check from './Check';
 import DropDown from './DropDown';
 import FeaturesList from './FeaturesList';
 
-function addLevel(level) {
+function withLevel(level) {
   return function(feature) {
     return { ...feature, level };
   }
@@ -12,19 +12,18 @@ function addLevel(level) {
 
 export default function Feature({ title, presence, subfeatures, level }) {
   const [open, setOpen] = useState(false);
-  const toggleOpen = (e) => {
-    e.stopPropagation();
-    setOpen(!open);
-  }
   const hasSubFeatures = !!subfeatures.length;
-  const cursor = hasSubFeatures ? 'pointer' : 'inherit';
   const fontSize = `${2 / level}rem`;
+  const cursor = hasSubFeatures ? 'pointer' : 'inherit';
+  const features = subfeatures.map(withLevel(level + 0.5));
   return (
-    <li style={{ cursor, fontSize }} onClick={e => toggleOpen(e)}>
-      {presence ? <Check /> : <X />}
-      <header className="title">{title}</header>
-      {hasSubFeatures && <DropDown />}
-      {hasSubFeatures && open && <FeaturesList features={subfeatures.map(addLevel(level + 0.5))} />}
+    <li style={{ fontSize }}>
+      <span style={{ cursor }} onClick={() => setOpen(!open)}>
+        {presence ? <Check /> : <X />}
+        <header className="title">{title}</header>
+        {hasSubFeatures && <DropDown />}
+      </span>
+      {open && <FeaturesList features={features} />}
     </li>
   );
 }

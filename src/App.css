@@ -9,6 +9,7 @@ ul {
 
 li {
   list-style: none;
+  margin: 1em 0 1em;
 }
 
 .App-header {
@@ -20,6 +21,11 @@ li {
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
+}
+
+.title {
+  display: inline;
+  margin: 0 1em;
 }
 
 @media only screen and (max-width: 600px) {

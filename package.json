@@ -5,7 +5,7 @@
   "homepage": "http://cjessett.github.io/hipcamp",
   "devDependencies": {
     "gh-pages": "^2.0.1",
-    "react-scripts": "3.0.1"
+    "react-scripts": "5.0.1"
   },
   "dependencies": {
     "react": "^16.8.6",
